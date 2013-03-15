@@ -87,10 +87,10 @@ public class Po8 {
 			for (int i = 0; i < items.size(); i++) {
 				Map<String, Object> map = (Map<String, Object>) items.get(i);
 				String id = (String) map.get("id");
-				boolean active = (int) map.get("active") == 1;
+				boolean active = Integer.parseInt(map.get("active").toString()) == 1;
 				Object minPrice = map.get("min_price");
 				Object maxPrice = map.get("max_price");
-				itemMap.put(id, new Po8Item(active, id, minPrice instanceof Integer ? (int) minPrice : (double) minPrice, maxPrice instanceof Integer ? (int) maxPrice : (double) maxPrice, (String) map.get("name"), (int) map.get("stackSize")));
+				itemMap.put(id, new Po8Item(active, id, minPrice instanceof Integer ? Integer.parseInt(minPrice.toString()) : Double.parseDouble(minPrice.toString()), maxPrice instanceof Integer ? Integer.parseInt(maxPrice.toString()) : Double.parseDouble(maxPrice.toString()), (String) map.get("name"), Integer.parseInt(map.get("stackSize").toString())));
 				if (!stockMap.containsKey(id))
 					stockMap.put(id, 0);
 			}
@@ -118,7 +118,7 @@ public class Po8 {
 			public void run() {
 				if(Po8.orderList.size() <= 0)
 					return;
-				
+
 				Player[] players = Bukkit.getServer().getOnlinePlayers();
 				for (Player player : players) {
 					if (player.hasPermission("po8.review"))
