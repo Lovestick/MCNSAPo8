@@ -37,8 +37,8 @@ public final class Po8Plugin extends JavaPlugin implements Listener {
 		if (!Po8.playerMap.containsKey(evt.getPlayer().getName()))
 			Po8.playerMap.put(evt.getPlayer().getName(), new Po8Player());
 
-		if (evt.getPlayer().hasPermission("po8.review"))
-			Po8Util.message(evt.getPlayer(), "&dThere are&5 " + Po8.orderList.size() + " &dnew Po8 orders to be reviewed.");
+		//if (evt.getPlayer().hasPermission("po8.review"))
+		//	Po8Util.message(evt.getPlayer(), "&dThere are&5 " + Po8.orderList.size() + " &dnew Po8 orders to be reviewed.");
 
 		Po8.playerMap.get(evt.getPlayer().getName()).isReviewingOrder = false;
 
@@ -59,15 +59,15 @@ public final class Po8Plugin extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
-	public void onInventoryOpen(InventoryOpenEvent evt) {
+	public void onInventoryOpen(InventoryClickEvent evt) {
 		if (evt.getView().getType() == InventoryType.CHEST && evt.getInventory().getHolder() instanceof Chest) {
 			Chest cc = (Chest) evt.getInventory().getHolder();
 			if (Po8.chestMap.containsKey(new SerializedLocation(cc.getLocation()))) {
 				int type = Po8.chestMap.get(new SerializedLocation(cc.getLocation()));
 				evt.setCancelled(true);
-				ItemStack[] inv = Po8.playerMap.get(evt.getPlayer().getName()).getInventory(type);
-				Po8InventoryHolder holder = new Po8InventoryHolder(type, evt.getPlayer().getName(), inv);
-				evt.getPlayer().openInventory(holder.getInventory());
+				ItemStack[] inv = Po8.playerMap.get(evt.getWhoClicked().getName()).getInventory(type);
+				Po8InventoryHolder holder = new Po8InventoryHolder(type, evt.getWhoClicked().getName(), inv);
+				evt.getWhoClicked().openInventory(holder.getInventory());
 			}
 		}
 	}
