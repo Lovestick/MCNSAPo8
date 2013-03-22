@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -17,6 +18,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import net.minecraft.server.v1_5_R2.*;
 
 import com.aegamesi.mc.po8.support.CardboardBox;
 import com.aegamesi.mc.po8.support.SLAPI;
@@ -281,6 +285,14 @@ public class Po8CommandExecutor implements CommandExecutor {
 				return true;
 			}
 			type = args[1].equalsIgnoreCase("sell") ? Po8.SELL : Po8.BUY;
+			
+			ItemStack is = new ItemStack(Material.CHEST, 1);
+			ItemMeta im = is.getItemMeta();
+			im.setDisplayName(ChatColor.DARK_BLUE + args[1]);
+			is.setItemMeta(im);
+			p.getInventory().addItem(is);
+			
+			/*
 			Location l = p.getLocation();
 			l.setY(l.getBlockY() - 1);
 			l.getBlock().setType(Material.CHEST);
@@ -289,7 +301,14 @@ public class Po8CommandExecutor implements CommandExecutor {
 			l.setZ(l.getBlockZ());
 			l.setYaw(0);
 			l.setPitch(0);
-			Po8.chestMap.put(new SerializedLocation(l), type);
+			*/
+			
+			//Enchanting chest to show name of chest.
+			//Po8.chesttag.setCompound("display", new NBTTagCompound());
+			//Po8.chesttag.setString("Name", args[1]);
+			//Po8.chesttag.setCompound("display", Po8.chesttag);
+			
+			//Po8.chestMap.put(new SerializedLocation(l), type);
 			return true;
 		}
 		if (args[0].equalsIgnoreCase("examine")) {

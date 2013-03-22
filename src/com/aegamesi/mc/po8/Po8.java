@@ -8,9 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.server.v1_5_R2.Enchantment;
+import net.minecraft.server.v1_5_R2.NBTTagCompound;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.aegamesi.mc.po8.support.SLAPI;
 import com.aegamesi.mc.po8.support.SerializedLocation;
@@ -21,6 +25,11 @@ public class Po8 {
 	public static HashMap<String, Integer> stockMap;
 	public static HashMap<String, Po8Item> itemMap;
 	public static ArrayList<Po8Order> orderList;
+	
+	
+	
+	//public static HashMap<Enchantment, Integer> chestenchant;
+	//public static NBTTagCompound chesttag;
 
 	public static SLAPI slapi;
 	public static double commission;
