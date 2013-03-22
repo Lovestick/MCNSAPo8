@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -58,15 +59,15 @@ public final class Po8Plugin extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
-	public void onInventoryOpen(InventoryClickEvent evt) {
+	public void onInventoryOpen(InventoryOpenEvent evt) {
 		if (evt.getView().getType() == InventoryType.CHEST && evt.getInventory().getHolder() instanceof Chest) {
 			Chest cc = (Chest) evt.getInventory().getHolder();
 			if (Po8.chestMap.containsKey(new SerializedLocation(cc.getLocation()))) {
 				int type = Po8.chestMap.get(new SerializedLocation(cc.getLocation()));
 				evt.setCancelled(true);
-				ItemStack[] inv = Po8.playerMap.get(evt.getWhoClicked().getName()).getInventory(type);
-				Po8InventoryHolder holder = new Po8InventoryHolder(type, evt.getWhoClicked().getName(), inv);
-				evt.getWhoClicked().openInventory(holder.getInventory());
+				ItemStack[] inv = Po8.playerMap.get(evt.getPlayer().getName()).getInventory(type);
+				Po8InventoryHolder holder = new Po8InventoryHolder(type, evt.getPlayer().getName(), inv);
+				evt.getPlayer().openInventory(holder.getInventory());
 			}
 		}
 	}
