@@ -60,7 +60,7 @@ public final class Po8Plugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onInventoryOpen(InventoryClickEvent evt) {
 		if (evt.getView().getType() == InventoryType.CHEST && evt.getInventory().getHolder() instanceof Chest) {
-			Chest cc = (Chest) evt.getInventory().getHolder()t;
+			Chest cc = (Chest) evt.getInventory().getHolder();
 			if (Po8.chestMap.containsKey(new SerializedLocation(cc.getLocation()))) {
 				int type = Po8.chestMap.get(new SerializedLocation(cc.getLocation()));
 				evt.setCancelled(true);
@@ -75,6 +75,7 @@ public final class Po8Plugin extends JavaPlugin implements Listener {
 	public void onInventoryClose(InventoryCloseEvent evt) {
 		if (evt.getInventory().getHolder() instanceof Po8InventoryHolder) {
 			// save?
+			
 			Po8InventoryHolder hold = (Po8InventoryHolder) evt.getInventory().getHolder();
 			Po8Player player = Po8.playerMap.get(hold.player);
 			ItemStack[] stacks = evt.getInventory().getContents();
