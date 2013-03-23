@@ -309,6 +309,7 @@ public class Po8CommandExecutor implements CommandExecutor {
 			//Po8.chesttag.setCompound("display", Po8.chesttag);
 			
 			//Po8.chestMap.put(new SerializedLocation(l), type);
+			//Po8.chestMap.put
 			return true;
 		}
 		if (args[0].equalsIgnoreCase("examine")) {
